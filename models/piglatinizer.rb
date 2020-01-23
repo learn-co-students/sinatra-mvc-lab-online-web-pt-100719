@@ -1,22 +1,29 @@
 class PigLatinizer
- 
-  def is_vowel?(word)
-    vowels = 'aeiouAEIOU'
-    vowels.include?(word[0])
-  end 
+  attr_accessor :phrase
   
-  def piglatinize(word)
-    if self.is_vowel?(word)
-      word.concat("way")
-    else
-      word.concat(word.slice!(/^[^aeiouAEIOU]*/i || "") + 'ay')
-    end
+  def initialize(phrase)
   end
   
-  def new_phrase(phrase)
-    phrase.split.collect do |word|
-      piglatinize(word).join(" ")
+  def piglatinize(phrase)
+    phrase = phrase.split(" ")
+    
+    phrase = phrase.map do |word| 
+      if word.match(/^([^aeiouAEIOU]+)/)
+        first_letter = word.match(/^([^aeiouAEIOU]*)/).to_s #will return first letter that is vowel 
+        "#{word.gsub(/^([^aeiouAEIOU]*)/, "")}#{first_letter}ay"
+      else
+        "#{word}way"
+      end
     end
+      
+    phrase.join(" ") 
+      
   end
+  
+  # def new_phrase(phrase)
+  #   phrase.split.collect do |word|
+  #     piglatinize(word).join(" ")
+  #   end
+  # end
   
 end
