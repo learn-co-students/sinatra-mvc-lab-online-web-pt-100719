@@ -5,8 +5,8 @@
     <title>title</title>
   </head>
   <body>
-    <h1>Here is your Latinized Phrase:</h1>
-    <%=@latinized_text.latinize%>
+    <h1>Here is your Latinized Phrase: <%= "#{@piglatinizer.piglatinize(@user_phrase)}" %></h1>
+    
   </body>
 </html>
  
